@@ -1,1 +1,0 @@
-# jayayoga.github.io

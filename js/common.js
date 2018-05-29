@@ -8,7 +8,7 @@ $(function() {
         }
     } catch (err) {
 
-    };
+    }
 
     $("img, a").on("dragstart", function(event) {
         event.preventDefault();
@@ -32,48 +32,48 @@ $(function() {
 
     });
 
-    $('.fitness-widget-xs-days').on('click', 'span', function () {
-        changeDayMobile($(this));
-    });
+    // $('.fitness-widget-xs-days').on('click', 'span', function () {
+    //     changeDayMobile($(this));
+    // });
 
 
     var version = 'full';
 
     var curDate = new Date();
     var curDay = curDate.getDay()-1;
-    if (curDay<0) curDay = 6
+    if (curDay<0) curDay = 6;
     console.log(curDay);
     var timeCol = 1;
     var curDayAdaptNum = curDay;
-    setDayMobile(curDay);
+    
 
-    function setDayMobile(day) {
-        $('.fitness-widget-xs-days span').removeClass('fitness-widget-cell-today');
-        $('.fitness-widget-xs-days').find('span').eq(day).addClass('fitness-widget-cell-today');
-        // $('.fitness-widget-table:first tbody tr').find('td:eq(' + (day + timeCol) + ')').each(function () {
-        //     $(this).css({display: 'table-cell'});
-        // });
-        // $('.fitness-widget-table:first tbody tr').find('td:not(:eq(' + (day + timeCol) + '))').each(function () {
-        //     $(this).css({display: 'none'});
-        // });
-        // app.helpers.checkEmptyTableMobile();
-    }
+    // function setDayMobile(day) {
+    //     $('.fitness-widget-xs-days span').removeClass('fitness-widget-cell-today');
+    //     $('.fitness-widget-xs-days').find('span').eq(day).addClass('fitness-widget-cell-today');
+    //     $('.fitness-widget-table:first tbody tr').find('td:eq(' + (day + timeCol) + ')').each(function () {
+    //         $(this).css({display: 'table-cell'});
+    //     });
+    //     $('.fitness-widget-table:first tbody tr').find('td:not(:eq(' + (day + timeCol) + '))').each(function () {
+    //         $(this).css({display: 'none'});
+    //     });
+    //     // app.helpers.checkEmptyTableMobile();
+    // }
 
 
 
-    function changeDayMobile(obj) {
-        curDayAdaptNum = $(obj).prevAll().length;
-        console.log(curDayAdaptNum);
-        $('.fitness-widget-xs-days span').removeClass('fitness-widget-cell-today');
-        $(obj).addClass('fitness-widget-cell-today');
-        $('.fitness-widget-table:first tbody tr').find('td:eq(' + (curDayAdaptNum + timeCol) + ')').each(function () {
-            $(this).css({display: 'table-cell'});
-        });
-        $('.fitness-widget-table:first tbody tr').find('td:not(:eq(' + (curDayAdaptNum + timeCol) + '))').each(function () {
-            $(this).css({display: 'none'});
-        });
-        // app.helpers.checkEmptyTableMobile();
-    }
+    // function changeDayMobile(obj) {
+    //     curDayAdaptNum = $(obj).prevAll().length;
+    //     //console.log(curDayAdaptNum);
+    //     $('.fitness-widget-xs-days span').removeClass('fitness-widget-cell-today');
+    //     $(obj).addClass('fitness-widget-cell-today');
+    //     $('.fitness-widget-table:first tbody tr').find('td:eq(' + (curDayAdaptNum + timeCol) + ')').each(function () {
+    //         $(this).css({display: 'table-cell'});
+    //     });
+    //     $('.fitness-widget-table:first tbody tr').find('td:not(:eq(' + (curDayAdaptNum + timeCol) + '))').each(function () {
+    //         $(this).css({display: 'none'});
+    //     });
+    //     // app.helpers.checkEmptyTableMobile();
+    // }
 
     // function hideEmptyRows() {
     //             if (wrappers.table.length > 0) {
@@ -94,28 +94,37 @@ $(function() {
     //
     //           }
 
-    function checkVersion(width){
-        if (width >= 992 ){
-            // $('.fitness-widget-table tbody').html('');
-            // app.helpers.getSchedule(false, "", "");
-            $('.fitness-widget-table:first tbody tr').find('td').each(function () {
-                $(this).css({display: 'table-cell'});
-            });
-            version = 'full';
-        }
-        if (width < 992 && version == 'full') {
-            $('.fitness-widget-table:first tbody tr').find('td:not(:eq(' + (curDayAdaptNum + timeCol) + '))').each(function () {
-                $(this).css({display: 'none'});
-            });
-            version = 'mobile';
-        }
-    }
+    // function checkVersion(width){
+    //     if (width >= 992 ){
+    //         // $('.fitness-widget-table tbody').html('');
+    //         // app.helpers.getSchedule(false, "", "");
+    //         $('.fitness-widget-table:first tbody tr').find('td').each(function () {
+    //             $(this).css({display: 'table-cell'});
+    //         });
+    //         version = 'full';
+    //     }
+    //     if (width < 992 ) {
+    //         $('.fitness-widget-table:first tbody tr').find('td:not(:eq(' + (curDayAdaptNum + timeCol) + '))').each(function () {
+    //             $(this).css({display: 'none'});
+    //         });
+    //         version = 'mobile';
+    //     }
+    // }
 
-    setInterval(function () {
-        checkVersion($('body').width());
-    }, 1);
+    $(".toggle").click(function() {
+        $( "#overlap-menu" ).animate({         
+          top: [ "0", "swing" ]
+        }, 500, "linear", function() {
+          $("#home").hide();
+        });
+      });
+
+      $( "#overlap-menu" ).click(function() {
+        $("#home").show();
+    });
 
     $(window).load(function() {
+        checkVersion($(window).width());
 
         $("a[data-fancybox=group1]").fancybox({
             'transitionIn'		: 'none',
